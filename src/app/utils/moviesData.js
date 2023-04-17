@@ -1,6 +1,16 @@
+const API_KEY = process.env.API_KEY;
+
 async function getTrendingMovies() {
   const response = await fetch(
-    `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.API_KEY}`
+    `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}`
+  );
+  const data = await response.json();
+  return data.results;
+}
+
+async function getPopularMovies() {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
   );
   const data = await response.json();
   return data.results;
@@ -28,4 +38,4 @@ const genres = [
   { id: 37, name: 'Western' },
 ];
 
-export { getTrendingMovies, genres };
+export { getTrendingMovies, genres, getPopularMovies };

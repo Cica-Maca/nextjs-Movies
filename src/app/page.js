@@ -1,12 +1,16 @@
-import MovieItem from './movieItem';
-import { getTrendingMovies } from './utils/getTrendingMovies';
+import {
+  getTrendingMovies,
+  genres,
+  getPopularMovies,
+} from './utils/moviesData';
 import Link from 'next/link';
 import Image from 'next/image';
 import popcornVector from 'public/popcornVector.png';
-import { genres } from './utils/getTrendingMovies';
+import MoviesList from './MoviesList';
 
 export default async function Home() {
   const trendingMovies = await getTrendingMovies();
+  const popularMovies = await getPopularMovies();
 
   const genresButtons = genres.map(({ id, name }) => (
     <Link
@@ -18,17 +22,6 @@ export default async function Home() {
     </Link>
   ));
 
-  const trendingMoviesElements = trendingMovies.map(
-    ({ id, title, vote_average, poster_path }) => (
-      <MovieItem
-        key={id}
-        title={title}
-        rating={vote_average}
-        poster={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-      />
-    )
-  );
-
   return (
     <>
       <div className='h-80 flex items-center '>
@@ -36,8 +29,9 @@ export default async function Home() {
           <div className='flex'>
             <div>
               <h1 className='font-bold text-5xl'>Welcome.</h1>
-              <h1 className='text-4xl font-semibold pb-12'>
-                Millions of movies to discover. Explore now.
+              <h1 className='text-3xl font-semibold pb-12'>
+                Millions of movies to discover, TV shows and people to discover.
+                Explore now.
               </h1>
             </div>
             <div>
@@ -69,15 +63,10 @@ export default async function Home() {
       <div className='flex flex-row flex-wrap justify-center '>
         {genresButtons}
       </div>
-      <div>
-        <h1 className='text-2xl font-semibold'>Trending</h1>
-        <div className='flex overflow-x-auto overflow-y-hidden py-4'>
-          {trendingMoviesElements}
-        </div>
-      </div>
-      <div>
-        
-      </div>
+
+      <MoviesList moviesData={trendingMovies} title='Trending' />
+
+      <MoviesList moviesData={popularMovies} title="What's Popular" />
     </>
   );
 }
