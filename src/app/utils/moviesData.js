@@ -16,6 +16,14 @@ async function getPopularMovies() {
   return data.results;
 }
 
+async function getPopularTV() {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US&page=1`
+  );
+  const data = await response.json();
+  return data.results;
+}
+
 const genres = [
   { id: 28, name: 'Action' },
   { id: 12, name: 'Adventure' },
@@ -38,4 +46,4 @@ const genres = [
   { id: 37, name: 'Western' },
 ];
 
-export { getTrendingMovies, genres, getPopularMovies };
+export { getTrendingMovies, genres, getPopularMovies, getPopularTV };

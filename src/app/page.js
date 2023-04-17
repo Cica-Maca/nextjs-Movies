@@ -2,6 +2,7 @@ import {
   getTrendingMovies,
   genres,
   getPopularMovies,
+  getPopularTV,
 } from './utils/moviesData';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -11,6 +12,7 @@ import MoviesList from './MoviesList';
 export default async function Home() {
   const trendingMovies = await getTrendingMovies();
   const popularMovies = await getPopularMovies();
+  const popularTV = await getPopularTV();
 
   const genresButtons = genres.map(({ id, name }) => (
     <Link
@@ -66,7 +68,12 @@ export default async function Home() {
 
       <MoviesList moviesData={trendingMovies} title='Trending' />
 
-      <MoviesList moviesData={popularMovies} title="What's Popular" />
+      <MoviesList
+        moviesData={popularMovies}
+        title="What's Popular In Theatres"
+      />
+
+      <MoviesList moviesData={popularTV} title="What's Popular On TV" />
     </>
   );
 }
