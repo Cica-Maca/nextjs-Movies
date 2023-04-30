@@ -1,18 +1,12 @@
-import {
-  getTrendingMovies,
-  genres,
-  getPopularMovies,
-  getPopularTV,
-} from './utils/moviesData';
+import { getTrending, genres, getPopular } from './utils/moviesData';
 import Link from 'next/link';
 import Image from 'next/image';
 import popcornVector from 'public/popcornVector.png';
 import MoviesList from './MoviesList';
 
 export default async function Home() {
-  const trendingMovies = await getTrendingMovies();
-  const popularMovies = await getPopularMovies();
-  const popularTV = await getPopularTV();
+  const trending = await getTrending();
+  const popular = await getPopular();
 
   const genresButtons = genres.map(({ id, name }) => (
     <Link
@@ -66,14 +60,9 @@ export default async function Home() {
         {genresButtons}
       </div>
 
-      <MoviesList moviesData={trendingMovies} title='Trending' />
+      <MoviesList movieTVData={trending} title='Trending' />
 
-      <MoviesList
-        moviesData={popularMovies}
-        title="What's Popular In Theatres"
-      />
-
-      <MoviesList moviesData={popularTV} title="What's Popular On TV" />
+      <MoviesList movieTVData={popular} title="What's Pupular" />
     </>
   );
 }

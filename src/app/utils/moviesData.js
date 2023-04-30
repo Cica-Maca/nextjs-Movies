@@ -1,27 +1,29 @@
 const API_KEY = process.env.API_KEY;
 
-async function getTrendingMovies() {
-  const response = await fetch(
+async function getTrending() {
+  const responseToday = await fetch(
     `https://api.themoviedb.org/3/trending/all/day?api_key=${API_KEY}`
   );
-  const data = await response.json();
-  return data.results;
+  const dataToday = await responseToday.json();
+  const responseWeek = await fetch(
+    `https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}`
+  );
+  const dataWeek = await responseWeek.json();
+  return { Today: dataToday.results, 'This Week': dataWeek.results };
 }
 
-async function getPopularMovies() {
-  const response = await fetch(
+async function getPopular() {
+  const responseMovies = await fetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
   );
-  const data = await response.json();
-  return data.results;
-}
+  const dataMovies = await responseMovies.json();
 
-async function getPopularTV() {
-  const response = await fetch(
+  const responseTV = await fetch(
     `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=en-US&page=1`
   );
-  const data = await response.json();
-  return data.results;
+  const dataTV = await responseTV.json();
+
+  return { 'In Theatres': dataMovies.results, 'On TV': dataTV.results };
 }
 
 const genres = [
@@ -46,4 +48,4 @@ const genres = [
   { id: 37, name: 'Western' },
 ];
 
-export { getTrendingMovies, genres, getPopularMovies, getPopularTV };
+export { getTrending, genres, getPopular };
