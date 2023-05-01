@@ -39,6 +39,7 @@ export default function MoviesList({ movieTVData, title }) {
             return (
               <MovieItem
                 key={id}
+                id={id}
                 title={title ? title : name} // TMDB has different callings for title/name of TV shows and movies
                 rating={vote_average}
                 poster={`https://image.tmdb.org/t/p/w500/${poster_path}`}
