@@ -30,13 +30,12 @@ export default async function Home() {
                 Explore now.
               </h1>
             </div>
-            <div>
+            <div className='relative h-24 w-14'>
               <Image
                 src={popcornVector}
                 alt='Popcorn vector'
-                width={100}
-                height={100}
-                className='pb-4'
+                fill
+                sizes='50vw'
               />
             </div>
           </div>
