@@ -4,8 +4,8 @@ import Link from 'next/link';
 
 export default function MovieItem({ poster, title, rating, id }) {
   return (
-    <Link href={`/movie/${id}`}>
-      <div className='w-36 h-80 relative bg-itemBackground rounded-2xl mr-5'>
+    <Link href={`/movie/${id}`} className='mr-5'>
+      <div className='w-36 h-80 relative bg-itemBackground rounded-2xl'>
         <Image
           src={poster}
           alt='cover'
