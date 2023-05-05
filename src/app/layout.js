@@ -8,9 +8,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang='en'>
+    <html lang='en' className='h-full'>
       <body
-        className={`bg-default text-white font-inter text-base antialiased font-feature-default`}
+        className={`bg-default text-white font-inter text-base antialiased font-feature-default h-full`}
       >
         <header>
           <nav className='flex justify-between w-full'>
@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
             </Link>
           </nav>
         </header>
-        <main className='p-6 xl:px-40'>{children}</main>
+        <main className='max-w-screen-2xl h-full m-auto'>{children}</main>
         <footer>
           <nav className='flex justify-around fixed bottom-0 w-full z-40'>
             <Link href='/trending'>Trending</Link>
