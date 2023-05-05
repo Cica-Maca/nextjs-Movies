@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 async function getMovieData(id) {
   const response = await fetch(
@@ -9,10 +10,33 @@ async function getMovieData(id) {
 }
 
 export default async function Page({ params }) {
-  const { poster_path, backdrop_path, title, release_date } =
-    await getMovieData(params.id);
+  const {
+    poster_path,
+    backdrop_path,
+    title,
+    release_date,
+    genres,
+    runtime,
+    tagline,
+    overview,
+  } = await getMovieData(params.id);
 
   const release_year = release_date.split('-')[0];
+
+  const genresButtons = genres.map((genre, index) => (
+    <>
+      <Link key={genre.id} href={`/genre/${genre.id}`} className='pr-0.5'>
+        {genre.name}
+        {index !== genres.length - 1 ? ',' : ''}
+      </Link>
+    </>
+  ));
+
+  const hours = Math.floor(runtime / 60);
+  const remainingMinutes = runtime % 60;
+  const formattedHours = hours > 0 ? hours + 'h ' : '';
+  const formattedMinutes = remainingMinutes > 0 ? remainingMinutes + 'm' : '';
+  const formattedRuntime = formattedHours + formattedMinutes;
 
   return (
     <>
@@ -48,6 +72,16 @@ export default async function Page({ params }) {
                 <div className='flex items-center'>
                   <h1 className='text-2xl font-bold pr-1'>{title}</h1>
                   <span>({release_year})</span>
+                </div>
+                <div>
+                  <span className='pr-1'>{release_date}</span>
+                  <span className='pr-1'>{genresButtons}</span>
+                  <span>{formattedRuntime}</span>
+                </div>
+                <h1 className='italic text-slate-400'>{tagline}</h1>
+                <div>
+                  <h1>Overview</h1>
+                  <p>{overview}</p>
                 </div>
               </div>
             </div>
