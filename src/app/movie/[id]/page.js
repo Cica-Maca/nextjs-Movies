@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import starImage from "public/star.png";
-import { getMovieData } from "src/app/utils/moviesData";
+import { getMovieData, getCredits } from "src/app/utils/moviesData";
 
 export default async function Page({ params }) {
   const {
@@ -15,6 +15,10 @@ export default async function Page({ params }) {
     overview,
     vote_average,
   } = await getMovieData(params.id);
+
+  const { crew } = await getCredits(params.id);
+
+  const director = crew.find((person) => person.job === "Director").name;
 
   const release_year = release_date.split("-")[0];
 
@@ -92,6 +96,12 @@ export default async function Page({ params }) {
                 <div className='pt-2'>
                   <h1 className='text-xl font-semibold'>Overview</h1>
                   <p className='pt-1'>{overview}</p>
+                </div>
+                <div className='pt-16'>
+                  <div>
+                    <h1 className='font-semibold'>{director}</h1>
+                    <h1 className='text-xs'>Director</h1>
+                  </div>
                 </div>
               </div>
             </div>
