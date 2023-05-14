@@ -1,14 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import starImage from "public/star.png";
-
-async function getMovieData(id) {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.API_KEY}&language=en-US`
-  );
-  const data = await response.json();
-  return data;
-}
+import { getMovieData } from "src/app/utils/moviesData";
 
 export default async function Page({ params }) {
   const {
