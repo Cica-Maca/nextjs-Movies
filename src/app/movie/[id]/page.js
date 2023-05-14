@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import starImage from "public/star.png";
 import PersonItem from "./PersonItem";
-import { getMovieData, getCredits } from "src/app/utils/moviesData";
+import { getMovieData, getCredits } from "@/app/utils/moviesData";
 
 export default async function Page({ params }) {
   const {
