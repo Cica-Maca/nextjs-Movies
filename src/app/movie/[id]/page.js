@@ -27,6 +27,7 @@ export default async function Page({ params }) {
         profile={`https://image.tmdb.org/t/p/w300${person.profile_path}`}
         name={person.name}
         character={person.character}
+        id={person.id}
       />
     ));
 
@@ -51,7 +52,7 @@ export default async function Page({ params }) {
 
   return (
     <>
-      <div
+      <section
         style={{
           backgroundImage: `url(
             'https://image.tmdb.org/t/p/w1920_and_h1080_multi_faces/${backdrop_path}'
@@ -60,7 +61,7 @@ export default async function Page({ params }) {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
         }}
-        className='sm:h-3/4 h-full'
+        className='sm:h-fit h-full'
       >
         <div
           style={{
@@ -119,13 +120,16 @@ export default async function Page({ params }) {
             </div>
           </div>
         </div>
-      </div>
-      <div>
+      </section>
+      <section>
         <h1 className='text-2xl font-medium pt-10'>Top Billed Cast</h1>
         <div className='flex overflow-x-auto overflow-y-hidden pt-6'>
           {castItems}
+          <div className='w-36 min-w-max h-64 mr-5 bg-itemBackground flex items-center'>
+            <Link href={`/movie/${params.id}/cast`}>View More</Link>
+          </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }
