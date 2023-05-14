@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import './globals.css';
+import Link from "next/link";
+import "./globals.css";
 
 export const metadata = {
-  title: 'Movies',
-  description: 'Movies database',
+  title: "Movies",
+  description: "Movies database",
 };
 
 export default function RootLayout({ children }) {
@@ -20,13 +20,6 @@ export default function RootLayout({ children }) {
           </nav>
         </header>
         <main className='max-w-screen-2xl h-full m-auto'>{children}</main>
-        <footer>
-          <nav className='flex justify-around fixed bottom-0 w-full z-40'>
-            <Link href='/trending'>Trending</Link>
-            <Link href='/'>Home</Link>
-            <Link href='/top'>Categories</Link>
-          </nav>
-        </footer>
       </body>
     </html>
   );

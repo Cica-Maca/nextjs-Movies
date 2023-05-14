@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import MovieItem from './movieItem';
+import { useState } from "react";
+import MovieItem from "./movieItem";
 
 export default function MoviesList({ movieTVData, title }) {
   const [selectedCategory, setSelectedCategory] = useState(
@@ -14,7 +14,7 @@ export default function MoviesList({ movieTVData, title }) {
     <button
       key={timeSelector}
       className={`${
-        clickedButtonIndex === index ? 'bg-itemBackground' : ''
+        clickedButtonIndex === index ? "bg-itemBackground" : ""
       } rounded-3xl w-40 h-full`}
       onClick={() => {
         setSelectedCategory(movieTVData[timeSelector]);

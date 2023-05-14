@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import starImage from "public/star.png";
+import PersonItem from "./PersonItem";
 import { getMovieData, getCredits } from "src/app/utils/moviesData";
 
 export default async function Page({ params }) {
@@ -16,7 +17,18 @@ export default async function Page({ params }) {
     vote_average,
   } = await getMovieData(params.id);
 
-  const { crew } = await getCredits(params.id);
+  const { crew, cast } = await getCredits(params.id);
+
+  const castItems = cast
+    .slice(0, 10)
+    .map((person) => (
+      <PersonItem
+        key={person.id}
+        profile={`https://image.tmdb.org/t/p/w300${person.profile_path}`}
+        name={person.name}
+        character={person.character}
+      />
+    ));
 
   const director = crew.find((person) => person.job === "Director").name;
 
@@ -106,6 +118,12 @@ export default async function Page({ params }) {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div>
+        <h1 className='text-2xl font-medium pt-10'>Top Billed Cast</h1>
+        <div className='flex overflow-x-auto overflow-y-hidden pt-6'>
+          {castItems}
         </div>
       </div>
     </>

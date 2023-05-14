@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import star from 'public/star.png';
-import Link from 'next/link';
+import Image from "next/image";
+import star from "public/star.png";
+import Link from "next/link";
 
 export default function MovieItem({ poster, title, rating, id }) {
   return (
@@ -11,7 +11,7 @@ export default function MovieItem({ poster, title, rating, id }) {
           alt='cover'
           width={500}
           height={750}
-          style={{ height: '70%', minWidth: '100%' }}
+          style={{ height: "70%", minWidth: "100%" }}
           className='rounded-2xl'
         />
         <div>
@@ -22,7 +22,7 @@ export default function MovieItem({ poster, title, rating, id }) {
                 width={17}
                 height={17}
                 alt='rating'
-                style={{ height: '17px', width: '17px' }}
+                style={{ height: "17px", width: "17px" }}
               />
             </div>
             <span>{Math.round(rating * 10) / 10}</span>
