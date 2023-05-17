@@ -34,6 +34,14 @@ async function getMovieData(id) {
   return data;
 }
 
+async function getTvData(id) {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`
+  );
+  const data = await response.json();
+  return data;
+}
+
 async function getCredits(id) {
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`
@@ -64,4 +72,4 @@ const genres = [
   { id: 37, name: "Western" },
 ];
 
-export { getTrending, genres, getPopular, getMovieData, getCredits };
+export { getTrending, genres, getPopular, getMovieData, getCredits, getTvData };
