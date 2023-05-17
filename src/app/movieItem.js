@@ -2,9 +2,9 @@ import Image from "next/image";
 import star from "public/star.png";
 import Link from "next/link";
 
-export default function MovieItem({ poster, title, rating, id }) {
+export default function MovieItem({ poster, title, rating, id, media }) {
   return (
-    <Link href={`/movie/${id}`} className='mr-5'>
+    <Link href={`/${media}/${id}`} className='mr-5'>
       <div className='w-36 h-80 relative bg-itemBackground rounded-2xl'>
         <Image
           src={poster}

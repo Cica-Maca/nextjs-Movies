@@ -1,8 +1,8 @@
-import { getTrending, genres, getPopular } from './utils/moviesData';
-import Link from 'next/link';
-import Image from 'next/image';
-import popcornVector from 'public/popcornVector.png';
-import MoviesList from './MoviesList';
+import { getTrending, genres, getPopular } from "./utils/moviesData";
+import Link from "next/link";
+import Image from "next/image";
+import popcornVector from "public/popcornVector.png";
+import MoviesList from "./MoviesList";
 
 export default async function Home() {
   const trending = await getTrending();

@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
             </Link>
           </nav>
         </header>
-        <main className='max-w-screen-2xl h-full m-auto'>{children}</main>
+        <main className='max-w-screen-xl h-full m-auto'>{children}</main>
       </body>
     </html>
   );

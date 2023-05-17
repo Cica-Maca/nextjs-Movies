@@ -10,6 +10,8 @@ export default function MoviesList({ movieTVData, title }) {
 
   const [clickedButtonIndex, setClickedButtonIndex] = useState(0);
 
+  let media = clickedButtonIndex === 1 ? "tv" : "movie"; // Checking what the selected category is so that it can be used to link to the corresponding route (tv/movie)
+
   const categories = Object.keys(movieTVData).map((timeSelector, index) => (
     <button
       key={timeSelector}
@@ -35,7 +37,7 @@ export default function MoviesList({ movieTVData, title }) {
       </div>
       <div className='flex overflow-x-auto overflow-y-hidden py-4'>
         {selectedCategory.map(
-          ({ id, title, name, vote_average, poster_path }) => {
+          ({ id, title, name, vote_average, poster_path, media_type }) => {
             return (
               <MovieItem
                 key={id}
@@ -43,6 +45,7 @@ export default function MoviesList({ movieTVData, title }) {
                 title={title ? title : name} // TMDB has different callings for title/name of TV shows and movies
                 rating={vote_average}
                 poster={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+                media={media_type ? media_type : media}
               />
             );
           }
