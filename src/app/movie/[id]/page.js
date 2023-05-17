@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import starImage from "public/star.png";
-import PersonItem from "./PersonItem";
-import { getMovieData, getCredits } from "@/app/utils/moviesData";
+import PersonItem from "@/app/components/PersonItem";
+import { getMovieData, getMovieCredits } from "@/app/utils/moviesData";
 
 export default async function Page({ params }) {
   const {
@@ -17,7 +17,7 @@ export default async function Page({ params }) {
     vote_average,
   } = await getMovieData(params.id);
 
-  const { crew, cast } = await getCredits(params.id);
+  const { crew, cast } = await getMovieCredits(params.id);
 
   const castItems = cast
     .slice(0, 10)

@@ -1,13 +1,13 @@
-import { getMovieData, getCredits } from "@/app/utils/moviesData";
+import { getMovieData, getMovieCredits } from "@/app/utils/moviesData";
 import Image from "next/image";
 import Link from "next/link";
-import PersonItemInCast from "./PersonItemInCast";
+import PersonItemInCast from "@/app/components/PersonItemInCast";
 import blankProfilePhoto from "/public/blankProfilePhoto.png";
 
 export default async function Page({ params }) {
   const { poster_path, title, release_date } = await getMovieData(params.id);
   const release_year = release_date.split("-")[0];
-  const { crew, cast } = await getCredits(params.id);
+  const { crew, cast } = await getMovieCredits(params.id);
 
   const castItems = cast.map((person) => (
     <div key={person.credit_id} className='pb-5'>
