@@ -1,18 +1,20 @@
-import { getMovieData, getMovieCredits } from "@/app/utils/moviesData";
+import { getTvData, getTvCredits } from "@/app/utils/moviesData";
 import Image from "next/image";
 import Link from "next/link";
+import PersonItemInCast from "@/app/components/PersonItemInCast";
+import blankProfilePhoto from "/public/blankProfilePhoto.png";
 import PeopleItems from "@/app/components/PeopleItems";
 
 export default async function Page({ params }) {
-  const { poster_path, title, release_date } = await getMovieData(params.id);
-  const release_year = release_date.split("-")[0];
-  const { crew, cast } = await getMovieCredits(params.id);
+  const { poster_path, name, first_air_date } = await getTvData(params.id);
+  const release_year = first_air_date.split("-")[0];
+  const { crew, cast } = await getTvCredits(params.id);
 
   return (
     <>
       <section className='p-10'>
         <div className='flex bg-itemBackground rounded-xl'>
-          <Link href={`/movie/${params.id}`}>
+          <Link href={`/tv/${params.id}`}>
             <Image
               alt='Movie poster'
               src={`https://image.tmdb.org/t/p/w300${poster_path}`}
@@ -22,13 +24,13 @@ export default async function Page({ params }) {
           </Link>
           <div className='flex flex-col justify-center pl-4'>
             <div className='flex'>
-              <Link href={`/movie/${params.id}`}>
-                <h1 className='text-3xl font-bold pr-2'>{title}</h1>
+              <Link href={`/tv/${params.id}`}>
+                <h1 className='text-3xl font-bold pr-2'>{name}</h1>
               </Link>
               <span className='text-3xl opacity-70'>({release_year})</span>
             </div>
             <Link
-              href={`/movie/${params.id}`}
+              href={`/tv/${params.id}`}
               className='text-lg font-semibold opacity-70'
             >
               ← Back to main
