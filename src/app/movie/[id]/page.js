@@ -22,12 +22,13 @@ export default async function Page({ params }) {
     vote_average,
   } = await getMovieData(params.id);
 
-  const { crew, cast } = await getMovieCredits(params.id);
-
   const movieVideos = await getMovieVideos(params.id);
   const trailerId = movieVideos.results.find(
     (video) => video.type === "Trailer"
   ).key;
+
+  const { crew, cast } = await getMovieCredits(params.id);
+
   const castItems = cast
     .slice(0, 10)
     .map((person) => (

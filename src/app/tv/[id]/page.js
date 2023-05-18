@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import starImage from "public/star.png";
 import PersonItem from "@/app/components/PersonItem";
-import { getTvData, getTvCredits } from "@/app/utils/moviesData";
+import { getTvData, getTvCredits, getTvVideos } from "@/app/utils/moviesData";
+import Trailer from "@/app/components/Trailer";
 
 export default async function Page({ params }) {
   const {
@@ -15,6 +16,11 @@ export default async function Page({ params }) {
     overview,
     vote_average,
   } = await getTvData(params.id);
+
+  const tvVideos = await getTvVideos(params.id);
+  const trailerId = tvVideos.results.find(
+    (video) => video.type === "Trailer"
+  ).key;
 
   const { crew, cast } = await getTvCredits(params.id);
 
@@ -92,6 +98,7 @@ export default async function Page({ params }) {
                       {vote_average.toFixed(1)}
                     </span>
                     <span className='text-slate-300'>/10</span>
+                    <Trailer id={trailerId} />
                   </div>
                 </div>
                 <h1 className='italic opacity-70 pt-2'>{tagline}</h1>
