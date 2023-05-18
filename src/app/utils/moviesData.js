@@ -58,6 +58,14 @@ async function getTvCredits(id) {
   return data;
 }
 
+async function getMovieVideos(id) {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
+  );
+  const data = await response.json();
+  return data;
+}
+
 const genres = [
   { id: 28, name: "Action" },
   { id: 12, name: "Adventure" },
@@ -88,4 +96,5 @@ export {
   getMovieCredits,
   getTvCredits,
   getTvData,
+  getMovieVideos,
 };

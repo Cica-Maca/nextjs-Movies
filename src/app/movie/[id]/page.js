@@ -2,7 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import starImage from "public/star.png";
 import PersonItem from "@/app/components/PersonItem";
-import { getMovieData, getMovieCredits } from "@/app/utils/moviesData";
+import Trailer from "@/app/components/Trailer";
+import {
+  getMovieData,
+  getMovieCredits,
+  getMovieVideos,
+} from "@/app/utils/moviesData";
 
 export default async function Page({ params }) {
   const {
@@ -19,6 +24,10 @@ export default async function Page({ params }) {
 
   const { crew, cast } = await getMovieCredits(params.id);
 
+  const movieVideos = await getMovieVideos(params.id);
+  const trailerId = movieVideos.results.find(
+    (video) => video.type === "Trailer"
+  ).key;
   const castItems = cast
     .slice(0, 10)
     .map((person) => (
@@ -103,6 +112,8 @@ export default async function Page({ params }) {
                       {vote_average.toFixed(1)}
                     </span>
                     <span className='text-slate-300'>/10</span>
+
+                    <Trailer id={trailerId} />
                   </div>
                 </div>
                 <h1 className='italic opacity-70 pt-2'>{tagline}</h1>
