@@ -1,8 +1,6 @@
 import { getTvData, getTvCredits } from "@/app/utils/moviesData";
 import Image from "next/image";
 import Link from "next/link";
-import PersonItemInCast from "@/app/components/PersonItemInCast";
-import blankProfilePhoto from "/public/blankProfilePhoto.png";
 import PeopleItems from "@/app/components/PeopleItems";
 
 export default async function Page({ params }) {
